@@ -48,7 +48,7 @@ namespace MyGame
 
             // TODO: use this.Content to load your game content here
             scoreFont = Content.Load<SpriteFont>("score");
-            Bullet.texture = Content.Load<Texture2D>("bots_bullet");
+            var bulletTexture = Content.Load<Texture2D>("bots_bullet");
             this.player = new Player(Content.Load<Texture2D>("moveWithGun"), 4, 5, 5)
             {
                 Input = new Controller

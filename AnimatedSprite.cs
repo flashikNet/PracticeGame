@@ -56,7 +56,7 @@ namespace MyGame
             Rectangle destinationRectanfle = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
 
             spriteBatch.Draw(Texture, destinationRectanfle, sourceRectangle, Color.White, RotateAngle,
-                new Vector2(Width / 2, Height / 2), SpriteEffects.None, 0f);
+                origin, SpriteEffects.None, 0f);
         }
     }
 }

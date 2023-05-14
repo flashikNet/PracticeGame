@@ -16,7 +16,7 @@ namespace MyGame
         public float Speed { get; set; } = 2f;
         int boost = 3;
         bool IsSpeedUp;
-        Vector2 origin;
+        protected Vector2 origin;
 
         public Controller Input { get; set; }
         public Sprite(Texture2D texture)
