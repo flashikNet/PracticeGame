@@ -6,11 +6,10 @@ namespace MyGame
 {
     public class Bullet : Sprite, ICloneable
     {
-        static Vector2 Speed { get; set; }
-        public static int Width { get; set; }
-        public static int Height { get; set; }
-        public Sprite parent;
-        public bool IsHidden
+
+        public Sprite Parent;
+        public Vector2 Direction;
+        public bool IsDone
         {
             get
             {
@@ -18,20 +17,14 @@ namespace MyGame
             }
         }
 
-        public Bullet(Texture2D texture, Vector2 position, Vector2 speed) : base(texture)
+        public Bullet(Texture2D texture) : base(texture)
         {
-            Position = position;
-            Speed = speed;
+
         }
 
-        public void Update()
+        public override void Update(GameTime gameTime)
         {
-            Position += Speed;
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(Texture, Position, Color.White);
+            Position += Speed * Direction;
         }
 
         public object Clone()

@@ -5,7 +5,6 @@ namespace MyGame
 {
     public class AnimatedSprite : Sprite
     {
-       // public Texture2D Texture { get; private set; }
         public int Rows { get; set; }
         public int Columns { get; set; }
         public int Height { get; set; }
@@ -21,12 +20,11 @@ namespace MyGame
         { 
             get
             {
-                return new Rectangle((int)Position.X, (int)Position.Y, Texture.Width/Columns, Texture.Height/Rows);
+                return new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
             }
         }
         public AnimatedSprite(Texture2D texture, int rows, int columns, int period) : base(texture)
         {
-            //Texture = texture;
             Rows = rows;
             Columns = columns;
             currentFrame = 0;
@@ -34,6 +32,7 @@ namespace MyGame
             Width = Texture.Width / Columns;
             Height = Texture.Height / Rows;
             this.period = period;
+            Origin = new Vector2 (Width/2, Height/2);
         }
 
         public override void Update(GameTime gameTime)
@@ -56,7 +55,7 @@ namespace MyGame
             Rectangle destinationRectanfle = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
 
             spriteBatch.Draw(Texture, destinationRectanfle, sourceRectangle, Color.White, RotateAngle,
-                origin, SpriteEffects.None, 0f);
+                Origin, SpriteEffects.None, 0f);
         }
     }
 }

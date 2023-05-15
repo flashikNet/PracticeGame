@@ -16,21 +16,19 @@ namespace MyGame
         public float Speed { get; set; } = 2f;
         int boost = 3;
         bool IsSpeedUp;
-        protected Vector2 origin;
-
-        public Controller Input { get; set; }
-        public Sprite(Texture2D texture)
-        {
-            this.Texture = texture;
-            origin = new Vector2(texture.Width/2, texture.Height/2);
-        }
-
+        public Vector2 Origin;
         public Rectangle Rectangle
         {
             get
             {
                 return new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
             }
+        }
+        public Controller Input { get; set; }
+        public Sprite(Texture2D texture)
+        {
+            this.Texture = texture;
+            Origin = new Vector2(texture.Width/2, texture.Height/2);
         }
 
         public virtual void Update(GameTime gameTime)
@@ -66,7 +64,7 @@ namespace MyGame
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Position, Color.White);
+            spriteBatch.Draw(Texture, Position, null, Color.White, 0f, Origin, 1f, SpriteEffects.None, 0f);
         }
     }
 }
