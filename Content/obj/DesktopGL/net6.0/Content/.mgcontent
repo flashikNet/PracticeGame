@@ -9,6 +9,7 @@
     <File>C:/code_learning/c#/MyGame/Content/Run.png</File>
     <File>C:/code_learning/c#/MyGame/Content/score.spritefont</File>
     <File>C:/code_learning/c#/MyGame/Content/survivor_move_handgun.png</File>
+    <File>C:/code_learning/c#/MyGame/Content/WIN_20230513_21_39_11_Pro.jpg</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
@@ -16,5 +17,6 @@
     <File>S1Run.png</File>
     <File xsi:nil="true" />
     <File>moveWithGun.png</File>
+    <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>

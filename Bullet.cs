@@ -9,11 +9,14 @@ namespace MyGame
 
         public Sprite Parent;
         public Vector2 Direction;
+        private static float lifeSpan = 30f;
+        private float timeToDie = lifeSpan;
         public bool IsDone
         {
             get
             {
-                return Position.X > MainGame.Width || Position.X < 0 || Position.Y > MainGame.Height || Position.Y < 0;
+                //return Position.X > MainGame.Width || Position.X < 0 || Position.Y > MainGame.Height || Position.Y < 0;
+                return timeToDie < 0;
             }
         }
 
@@ -25,11 +28,13 @@ namespace MyGame
         public override void Update(GameTime gameTime)
         {
             Position += Speed * Direction;
+            timeToDie -= 1;
         }
 
         public object Clone()
         {
             return this.MemberwiseClone();
+            
         }
     }
 }

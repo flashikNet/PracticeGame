@@ -28,3 +28,4 @@ C:\code_learning\c#\MyGame\bin\Debug\net6.0\Content\score.xnb
 C:\code_learning\c#\MyGame\bin\Debug\net6.0\Content\S1Run.xnb
 C:\code_learning\c#\MyGame\bin\Debug\net6.0\Content\moveWithGun.xnb
 C:\code_learning\c#\MyGame\bin\Debug\net6.0\Content\bots_bullet.xnb
+C:\code_learning\c#\MyGame\bin\Debug\net6.0\Content\WIN_20230513_21_39_11_Pro.xnb

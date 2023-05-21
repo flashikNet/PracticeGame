@@ -15,7 +15,9 @@ namespace MyGame
         Stopwatch timer = new Stopwatch();
         public static int Width { get; private set; }
         public static int Height { get; private set; }
-        
+        Camera camera;
+        Player player;
+        Texture2D background;
 
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -43,7 +45,9 @@ namespace MyGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("score");
             var bulletTexture = Content.Load<Texture2D>("bots_bullet");
-            Sprites.Add(new Player(Content.Load<Texture2D>("moveWithGun"), 4, 5, 5)
+            background = Content.Load<Texture2D>("WIN_20230513_21_39_11_Pro");
+            var backSprite = new Sprite(background);
+            player = new Player(Content.Load<Texture2D>("moveWithGun"), 4, 5, 5, new Bullet(bulletTexture) { Speed = 30 })
             {
                 Input = new Controller
                 {
@@ -59,11 +63,13 @@ namespace MyGame
                 },
                 Position = new Vector2(Width / 2, Height / 2),
                 Speed = 300f,
-                Bullet = new Bullet(bulletTexture) { Speed = 30 },
                 Origin = new Vector2(104, 121),
                 Offset = new Vector2(119, 42),
                 UseRate = 250
-            }); ;
+            };
+            Sprites.Add(backSprite);
+            Sprites.Add(player);
+            camera = new Camera();
 
         }
 
@@ -80,13 +86,14 @@ namespace MyGame
                     i--;
                 }
             }
+            camera.Follow(player);
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.YellowGreen);
-            spriteBatch.Begin();
+            spriteBatch.Begin(transformMatrix: camera.Transform);
 
             foreach (var sprite in Sprites)
                 sprite.Draw(spriteBatch);

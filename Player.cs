@@ -18,8 +18,9 @@ namespace MyGame
         private static Stopwatch timer = new Stopwatch();
         public int UseRate { get; set; } = 200;
         public Vector2 Offset { get; set; }
-        public Player(Texture2D texture, int rows, int columns, int period) :base(texture, rows, columns, period)
+        public Player(Texture2D texture, int rows, int columns, int period, Bullet bullet) :base(texture, rows, columns, period)
         {
+            this.Bullet = bullet;
             timer.Start();
         }
 
@@ -28,7 +29,7 @@ namespace MyGame
             if (Input == null) throw new Exception("No Controller to Player");
             base.Move(gameTime);
 
-            Position = Vector2.Clamp(Position, Origin, new Vector2(MainGame.Width - Width / 2, MainGame.Height - Height / 2));
+            //Position = Vector2.Clamp(Position, Origin, new Vector2(MainGame.Width - Width / 2, MainGame.Height - Height / 2));
 
             Shoot();
         }
