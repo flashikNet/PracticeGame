@@ -8,8 +8,6 @@ using System.Linq;
 
 namespace MyGame
 {
-    //i love my game
-    // where is my game...
     public class MainGame : Game
     {
         SpriteFont font;
