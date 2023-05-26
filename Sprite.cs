@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MyGame
 {
-    public class Sprite
+    public class Sprite : Models
     {
         public Texture2D Texture { get; protected set; }
         public Vector2 Position;
@@ -17,6 +17,7 @@ namespace MyGame
         int boost = 3;
         bool IsSpeedUp;
         public Vector2 Origin;
+        public float Scale { get; set; } = 1f;
         public Rectangle Rectangle
         {
             get
@@ -31,7 +32,14 @@ namespace MyGame
             Origin = new Vector2(texture.Width/2, texture.Height/2);
         }
 
-        public virtual void Update(GameTime gameTime)
+        public Sprite(Texture2D texture, Vector2 position)
+        {
+            this.Texture = texture;
+            Position = position;
+            Origin = new Vector2(texture.Width / 2, texture.Height / 2);
+        }
+
+        public override void Update(GameTime gameTime)
         {
             Move(gameTime);
         }
@@ -62,9 +70,9 @@ namespace MyGame
             }
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Position, null, Color.White, 0f, Origin, 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(Texture, Position, null, Color.White, 0f, Origin, Scale, SpriteEffects.None, 0f);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace MyGame
 
         public Sprite Parent;
         public Vector2 Direction;
-        private static float lifeSpan = 30f;
+        private static float lifeSpan = 500f;
         private float timeToDie = lifeSpan;
         public bool IsDone
         {
