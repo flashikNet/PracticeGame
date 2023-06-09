@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyGame
 {
-    public abstract class Models
+    public abstract class Model
     {
         public abstract void Draw(SpriteBatch spriteBatch);
 

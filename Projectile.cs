@@ -4,23 +4,24 @@ using System;
 
 namespace MyGame
 {
-    public class Bullet : Sprite, ICloneable
+    public class Projectile : Sprite, ICloneable
     {
 
         public Sprite Parent;
         public Vector2 Direction;
         private static float lifeSpan = 500f;
         private float timeToDie = lifeSpan;
+        public int Speed { get; init; } = 200;
+        public int Damage { get; init; } = 1;
         public bool IsDone
         {
             get
             {
-                //return Position.X > MainGame.Width || Position.X < 0 || Position.Y > MainGame.Height || Position.Y < 0;
-                return timeToDie < 0;
+                return timeToDie <= 0;
             }
         }
 
-        public Bullet(Texture2D texture) : base(texture)
+        public Projectile(Texture2D texture) : base(texture)
         {
 
         }
@@ -29,6 +30,11 @@ namespace MyGame
         {
             Position += Speed * Direction;
             timeToDie -= 1;
+        }
+
+        public void Destroy()
+        {
+            timeToDie = 0;
         }
 
         public object Clone()
