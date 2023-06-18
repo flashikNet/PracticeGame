@@ -1,19 +1,20 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MyGame.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyGame
+namespace MyGame.Sprites
 {
     public class Enemy : AnimatedSprite
     {
         static float epsilon = 1f;
         Vector2 previousPosition;
         public int HealthPoint { get; private set; } = 5;
-        public Enemy(Texture2D texture, int rows, int column) : base(texture,rows, column)
+        public Enemy(Texture2D texture, int rows, int column) : base(texture, rows, column)
         {
         }
 
@@ -29,13 +30,13 @@ namespace MyGame
 
         public void TakeDamage(int damage)
         {
-            HealthPoint-= damage;
+            HealthPoint -= damage;
             if (HealthPoint == 1) color = Color.DarkRed;
         }
 
         public void MoveToPlayer(GameTime gameTime)
         {
-            var target = MainGame.Player.Position;
+            var target = MainGameManager.Player.Position;
             var time = (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (Position.X - target.X < -epsilon)
             {
@@ -45,17 +46,17 @@ namespace MyGame
             if (Position.X - target.X > epsilon)
             {
                 Position.X -= Speed * time;
-                rotateAngle = (float)MathF.PI;
+                rotateAngle = MathF.PI;
             }
             if (Position.Y - target.Y < -epsilon)
             {
                 Position.Y += Speed * time;
-                rotateAngle = (float)MathF.PI / 2;
+                rotateAngle = MathF.PI / 2;
             }
-            if(Position.Y - target.Y > epsilon)
+            if (Position.Y - target.Y > epsilon)
             {
                 Position.Y -= Speed * time;
-                rotateAngle = -(float)MathF.PI / 2;
+                rotateAngle = -MathF.PI / 2;
             }
             if (Position.X - previousPosition.X > epsilon)
             {

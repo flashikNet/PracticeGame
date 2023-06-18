@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using System;
 
-namespace MyGame
+namespace MyGame.Sprites
 {
     public class Projectile : Sprite, ICloneable
     {
@@ -39,8 +39,8 @@ namespace MyGame
 
         public object Clone()
         {
-            return this.MemberwiseClone();
-            
+            return MemberwiseClone();
+
         }
     }
 }

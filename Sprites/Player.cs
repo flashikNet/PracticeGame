@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MyGame.Managers;
+using MyGame.Other;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MyGame
+namespace MyGame.Sprites
 {
     public class Player : AnimatedSprite
     {
@@ -26,9 +28,9 @@ namespace MyGame
 
         public InputManager Input { get; init; }
         public ProjectileManager ProjectileManager { get; init; }
-        public Player(Texture2D texture, int rows, int columns, int period, Projectile bullet, int healthPoint = 100) :base(texture, rows, columns, period)
+        public Player(Texture2D texture, int rows, int columns, int period, Projectile bullet, int healthPoint = 100) : base(texture, rows, columns, period)
         {
-            this.Bullet = bullet;
+            Bullet = bullet;
             ShiftTime = 10000;
             timer.Start();
             damageTimer.Start();
@@ -42,14 +44,14 @@ namespace MyGame
                 damageTimer.Restart();
                 HealthPoint -= damage;
                 color = Color.Multiply(Color.White, 0.5f);
-                if (HealthPoint <= 0) MainGame.State = State.Over;
+                if (HealthPoint <= 0) MainGameManager.State = State.Over;
             }
-            
+
         }
 
         private void SetDamagable()
         {
-            if(damageTimer.ElapsedMilliseconds > immmortalTime)
+            if (damageTimer.ElapsedMilliseconds > immmortalTime)
             {
                 color = Color.White;
             }
@@ -58,8 +60,8 @@ namespace MyGame
         {
             var tileSize = map.TileSize;
             var mapSize = map.MapSize;
-            minPos = new((-tileSize.X / 2) + Origin.X, (-tileSize.Y / 2) + Origin.Y);
-            maxPos = new(mapSize.X - (tileSize.X / 2) - Origin.X, mapSize.Y - (tileSize.X / 2) - Origin.Y);
+            minPos = new(-tileSize.X / 2 + Origin.X, -tileSize.Y / 2 + Origin.Y);
+            maxPos = new(mapSize.X - tileSize.X / 2 - Origin.X, mapSize.Y - tileSize.X / 2 - Origin.Y);
         }
 
         public override void Update(GameTime gameTime)
@@ -89,7 +91,7 @@ namespace MyGame
                 Position.Y -= Speed * time;
             if (Input.IsKeyDown(Keys.S))
                 Position.Y += Speed * time;
-            if(isBoosted) Speed /= boost;
+            if (isBoosted) Speed /= boost;
         }
 
         private void Shoot()
@@ -99,13 +101,13 @@ namespace MyGame
             {
                 if (Input.IsKeyDown(Keys.Up))
                 {
-                    AddBullet(new Vector2(0, -1), Offset.Rotate(Math.PI/2));
+                    AddBullet(new Vector2(0, -1), Offset.Rotate(Math.PI / 2));
                     rotateAngle = -MathF.PI / 2;
                     timer.Restart();
                 }
                 else if (Input.IsKeyDown(Keys.Down))
                 {
-                    AddBullet(new Vector2(0, 1), Offset.Rotate(-Math.PI/2));
+                    AddBullet(new Vector2(0, 1), Offset.Rotate(-Math.PI / 2));
                     rotateAngle = MathF.PI / 2;
                     timer.Restart();
                 }

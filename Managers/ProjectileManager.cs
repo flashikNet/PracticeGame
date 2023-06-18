@@ -1,12 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MyGame.Sprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyGame
+namespace MyGame.Managers
 {
     public class ProjectileManager
     {
@@ -37,7 +38,7 @@ namespace MyGame
                 foreach (var enemy in enemies)
                 {
                     if (enemy.HealthPoint <= 0) continue;
-                    if((projectile.Position - enemy.Position).Length() < 120)
+                    if ((projectile.Position - enemy.Position).Length() < 120)
                     {
                         enemy.TakeDamage(projectile.Damage);
                         projectile.Destroy();
@@ -45,7 +46,7 @@ namespace MyGame
                     }
                 }
             }
-            projectiles.RemoveAll(p  => p.IsDone);
+            projectiles.RemoveAll(p => p.IsDone);
         }
     }
 }

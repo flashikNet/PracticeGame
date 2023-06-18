@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MyGame.Sprites;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyGame
+namespace MyGame.Managers
 {
     public class EnemyManager
     {
@@ -23,7 +24,7 @@ namespace MyGame
             this.texture = texture;
             enemyList = new List<Enemy>();
             timer = new Stopwatch();
-            dictance = (float)Math.Sqrt(Math.Pow(MainGame.Width/2, 2) + Math.Pow(MainGame.Height/2, 2));
+            dictance = (float)Math.Sqrt(Math.Pow(MainGameManager.Width / 2, 2) + Math.Pow(MainGameManager.Height / 2, 2));
             this.count = count;
             this.coolDown = coolDown;
             timer.Start();
@@ -44,14 +45,14 @@ namespace MyGame
             foreach (var enemy in enemyList)
             {
                 enemy.Update(gameTime);
-                if((enemy.Position - player.Position).Length() < 150)
+                if ((enemy.Position - player.Position).Length() < 150)
                 {
                     player.TakeDamage(20);
                 }
             }
-            if(LeftCount == 0)
+            if (LeftCount == 0)
             {
-                MainGame.State = State.End;
+                MainGameManager.State = State.End;
             }
         }
 
@@ -85,8 +86,8 @@ namespace MyGame
 
         public Vector2 GetPosition()
         {
-            var origin = MainGame.Player.Position;
-            var angle = MathHelper.ToRadians(MainGame.Random.Next(360));
+            var origin = MainGameManager.Player.Position;
+            var angle = MathHelper.ToRadians(MainGameManager.Random.Next(360));
             var dx = dictance * (float)Math.Cos(angle);
             var dy = dictance * (float)Math.Sin(angle);
             return new Vector2(origin.X + dx, origin.Y + dy);

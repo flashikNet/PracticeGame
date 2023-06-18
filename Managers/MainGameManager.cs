@@ -3,12 +3,14 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using MyGame.Other;
+using MyGame.Sprites;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace MyGame
+namespace MyGame.Managers
 {
 
     public enum State
@@ -18,7 +20,7 @@ namespace MyGame
         End,
         Over,
     }
-    public class MainGame : Game
+    public class MainGameManager : Game
     {
         public static int Width { get; private set; }
         public static int Height { get; private set; }
@@ -38,7 +40,7 @@ namespace MyGame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public MainGame()
+        public MainGameManager()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -54,7 +56,7 @@ namespace MyGame
             Width = graphics.PreferredBackBufferWidth;
             Random = new Random();
             inputManager = new InputManager();
-            startManager = new StartManager() { InputManager = inputManager};
+            startManager = new StartManager() { InputManager = inputManager };
             var countryNumber = startManager.CountryNumber;
             endManager = new EndManager(countryNumber);
             overManager = new OverManager(countryNumber);
@@ -69,7 +71,7 @@ namespace MyGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Font = Content.Load<SpriteFont>("font");
             for (int i = 1; i < 62; i++)
-                backTextures.Add(Content.Load<Texture2D>($"image_part_{i.ToString().PadLeft(3,'0')}"));
+                backTextures.Add(Content.Load<Texture2D>($"image_part_{i.ToString().PadLeft(3, '0')}"));
             var bulletTexture = Content.Load<Texture2D>("bullet");
             map = new Map(backTextures, 100, 100);
             projectileManager = new ProjectileManager();
@@ -86,7 +88,7 @@ namespace MyGame
             };
             Player.SetBounds(map);
             enemyManager = new EnemyManager(Content.Load<Texture2D>("enemy"), 100, 500);
-            camera = new Camera() { Map = map};
+            camera = new Camera() { Map = map };
             startManager.Texture = Content.Load<Texture2D>("start");
             overManager.Texture = Content.Load<Texture2D>("gameOver");
             endManager.Texture = Content.Load<Texture2D>("good");
@@ -105,15 +107,15 @@ namespace MyGame
                 Player.Update(gameTime);
                 camera.Follow(Player);
             }
-            else if(State == State.Start)
+            else if (State == State.Start)
             {
                 startManager.Update(gameTime);
             }
-            else if(State == State.End)
+            else if (State == State.End)
             {
                 endManager.Update(gameTime);
             }
-            else if( State == State.Over)
+            else if (State == State.Over)
             {
                 overManager.Update(gameTime);
             }
@@ -128,7 +130,7 @@ namespace MyGame
             {
                 spriteBatch.Begin(transformMatrix: camera.Transform);
                 map.Draw(spriteBatch);
-                spriteBatch.DrawString(Font, "Use WASD, left shift and arrows", map.MapSize/2 - new Vector2(400,300), Color.White);
+                spriteBatch.DrawString(Font, "Use WASD, left shift and arrows", map.MapSize / 2 - new Vector2(400, 300), Color.White);
                 enemyManager.Draw(spriteBatch);
                 projectileManager.Draw(spriteBatch);
                 Player.Draw(spriteBatch);
@@ -137,17 +139,17 @@ namespace MyGame
                 spriteBatch.DrawString(Font, $"HP: {Player.HealthPoint}", new Vector2(400, 450) + Player.Position,
                     Player.HealthPoint > 20 ? Color.White : Color.Red);
             }
-            else if(State == State.Start)
+            else if (State == State.Start)
             {
                 spriteBatch.Begin();
                 startManager.Draw(spriteBatch);
             }
-            else if(State == State.End)
+            else if (State == State.End)
             {
                 spriteBatch.Begin();
                 endManager.Draw(spriteBatch);
             }
-            else if (State == State.Over) 
+            else if (State == State.Over)
             {
                 spriteBatch.Begin();
                 overManager.Draw(spriteBatch);

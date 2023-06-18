@@ -8,7 +8,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <ApplicationIcon>CZM.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
     <AssemblyName>Crazy Zombie Massacre</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
@@ -16,7 +16,7 @@
     <None Remove="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CZM.ico" />
+    <Content Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
 	  <EmbeddedResource Include="Icon.ico">

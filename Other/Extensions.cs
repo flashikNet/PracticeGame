@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyGame
+namespace MyGame.Other
 {
     public static class Vector2Extensions
     {
@@ -21,7 +21,7 @@ namespace MyGame
 
     public static class Countries
     {
-        public static String[] CountriesList = new string[]
+        public static string[] CountriesList = new string[]
         {
             "Afghanistan",
             "Albania",

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MyGame
+namespace MyGame.Sprites
 {
     public class AnimatedSprite : Sprite
     {
@@ -19,7 +19,7 @@ namespace MyGame
         int period;
 
         public new Rectangle Rectangle
-        { 
+        {
             get
             {
                 return new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
@@ -34,10 +34,10 @@ namespace MyGame
             Width = Texture.Width / Columns;
             Height = Texture.Height / Rows;
             this.period = period;
-            Origin = new Vector2 (Width/2, Height/2);
+            Origin = new Vector2(Width / 2, Height / 2);
         }
 
-        public AnimatedSprite(Texture2D texture,Vector2 position, int rows, int columns, int period = 5) : base(texture,position)
+        public AnimatedSprite(Texture2D texture, Vector2 position, int rows, int columns, int period = 5) : base(texture, position)
         {
             Rows = rows;
             Columns = columns;
@@ -52,7 +52,7 @@ namespace MyGame
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            if (counter % period == 0) 
+            if (counter % period == 0)
             {
                 currentFrame++;
                 counter++;
@@ -65,7 +65,7 @@ namespace MyGame
         {
             int row = currentFrame / Columns;
             int col = currentFrame % Columns;
-            Rectangle sourceRectangle = new Rectangle(Width*col, Height*row, Width, Height);
+            Rectangle sourceRectangle = new Rectangle(Width * col, Height * row, Width, Height);
             Rectangle destinationRectanfle = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
 
             spriteBatch.Draw(Texture, destinationRectanfle, sourceRectangle, color, rotateAngle,

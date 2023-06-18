@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyGame
+namespace MyGame.Sprites
 {
     public class Sprite : Model
     {
@@ -24,13 +24,13 @@ namespace MyGame
         }
         public Sprite(Texture2D texture)
         {
-            this.Texture = texture;
-            Origin = new Vector2(texture.Width/2, texture.Height/2);
+            Texture = texture;
+            Origin = new Vector2(texture.Width / 2, texture.Height / 2);
         }
 
         public Sprite(Texture2D texture, Vector2 position)
         {
-            this.Texture = texture;
+            Texture = texture;
             Position = position;
             Origin = new Vector2(texture.Width / 2, texture.Height / 2);
         }

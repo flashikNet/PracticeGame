@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyGame
+namespace MyGame.Managers
 {
-    public class InputManager 
+    public class InputManager
     {
         KeyboardState currentState;
         KeyboardState oldState;

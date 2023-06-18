@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyGame
+namespace MyGame.Sprites
 {
     public class Map
     {
@@ -30,7 +30,7 @@ namespace MyGame
                 for (int x = 0; x < mapTileSize.X; x++)
                 {
                     int r = random.Next(0, textures.Count);
-                    tiles[x, y] = new(textures[r], new(x * TileSize.X, y * TileSize.Y)) { Scale = Scale};
+                    tiles[x, y] = new(textures[r], new(x * TileSize.X, y * TileSize.Y)) { Scale = Scale };
                 }
             }
         }

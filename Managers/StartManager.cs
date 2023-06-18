@@ -1,15 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MyGame.Other;
+using MyGame.Sprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyGame
+namespace MyGame.Managers
 {
-    public class StartManager : Model
+    public class StartManager : Sprites.Model
     {
         public int CountryNumber { get; private set; }
         public InputManager InputManager { get; set; }
@@ -17,7 +19,7 @@ namespace MyGame
 
         public StartManager()
         {
-            CountryNumber =  MainGame.Random.Next(Countries.CountriesList.Length);
+            CountryNumber = MainGameManager.Random.Next(Countries.CountriesList.Length);
         }
 
         public StartManager(int countryNumber)
@@ -27,9 +29,9 @@ namespace MyGame
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, Vector2.Zero, Color.White);
-            spriteBatch.DrawString(MainGame.Font, $"{Countries.CountriesList[CountryNumber]} is attacked by zombies!",
+            spriteBatch.DrawString(MainGameManager.Font, $"{Countries.CountriesList[CountryNumber]} is attacked by zombies!",
                 new Vector2(250, 440), Color.White);
-            spriteBatch.DrawString(MainGame.Font,"Press space button and save the world!",
+            spriteBatch.DrawString(MainGameManager.Font, "Press space button and save the world!",
                 new Vector2(650, 950), Color.White);
         }
 
@@ -37,7 +39,7 @@ namespace MyGame
         {
             if (InputManager.IsKeyDown(Keys.Space))
             {
-                MainGame.State = State.Game;
+                MainGameManager.State = State.Game;
             }
         }
     }
