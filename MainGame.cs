@@ -43,7 +43,6 @@ namespace MyGame
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-
         }
 
         protected override void Initialize()
@@ -68,25 +67,25 @@ namespace MyGame
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Font = Content.Load<SpriteFont>("score");
+            Font = Content.Load<SpriteFont>("font");
             for (int i = 1; i < 62; i++)
                 backTextures.Add(Content.Load<Texture2D>($"image_part_{i.ToString().PadLeft(3,'0')}"));
             var bulletTexture = Content.Load<Texture2D>("bullet");
             map = new Map(backTextures, 100, 100);
             projectileManager = new ProjectileManager();
-            Player = new Player(Content.Load<Texture2D>("moveWithGun"), 4, 5, 5,
+            Player = new Player(Content.Load<Texture2D>("player"), 4, 5, 5,
                 new Projectile(bulletTexture) { Speed = 20 })
             {
                 ProjectileManager = projectileManager,
                 Input = inputManager,
-                Position = new Vector2(Width / 2, Height / 2),
+                Position = map.MapSize / 2,
                 Speed = 300f,
                 Origin = new Vector2(104, 121),
                 Offset = new Vector2(127, 42),
                 UseRate = 200,
             };
             Player.SetBounds(map);
-            enemyManager = new EnemyManager(Content.Load<Texture2D>("enemyA"), 100, 500);
+            enemyManager = new EnemyManager(Content.Load<Texture2D>("enemy"), 100, 500);
             camera = new Camera() { Map = map};
             startManager.Texture = Content.Load<Texture2D>("start");
             overManager.Texture = Content.Load<Texture2D>("gameOver");
@@ -129,14 +128,14 @@ namespace MyGame
             {
                 spriteBatch.Begin(transformMatrix: camera.Transform);
                 map.Draw(spriteBatch);
-                spriteBatch.DrawString(Font, "Use WASD, left shift and arrows", new Vector2(50, 50), Color.White);
+                spriteBatch.DrawString(Font, "Use WASD, left shift and arrows", map.MapSize/2 - new Vector2(400,300), Color.White);
                 enemyManager.Draw(spriteBatch);
                 projectileManager.Draw(spriteBatch);
                 Player.Draw(spriteBatch);
                 spriteBatch.DrawString(Font, $"Boost: {Player.ShiftTime}ms", new Vector2(400, 350) + Player.Position, Color.White);
                 spriteBatch.DrawString(Font, $"Enemies: {enemyManager.LeftCount}", new Vector2(400, 400) + Player.Position, Color.White);
                 spriteBatch.DrawString(Font, $"HP: {Player.HealthPoint}", new Vector2(400, 450) + Player.Position,
-                    Player.HealthPoint>20? Color.White: Color.Red);
+                    Player.HealthPoint > 20 ? Color.White : Color.Red);
             }
             else if(State == State.Start)
             {

@@ -41,7 +41,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:enemy_animated.png;enemyA.png
+/build:enemy_animated.png;enemy.png
 
 #begin gameOver.jpg
 /importer:TextureImporter
@@ -816,19 +816,7 @@
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:score.spritefont
-
-#begin skeleton-idle_6.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:skeleton-idle_6.png;enemy.png
+/build:score.spritefont;font.spritefont
 
 #begin start.jpg
 /importer:TextureImporter
@@ -852,5 +840,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:survivor_move_handgun.png;moveWithGun.png
+/build:survivor_move_handgun.png;player.png
 

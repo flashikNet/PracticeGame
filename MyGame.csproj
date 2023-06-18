@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,15 +8,23 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <ApplicationIcon>CZM.ico</ApplicationIcon>
+    <AssemblyName>Crazy Zombie Massacre</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Icon.ico" />
-    <EmbeddedResource Include="Icon.bmp" />
+    <Content Include="CZM.ico" />
+  </ItemGroup>
+  <ItemGroup>
+	  <EmbeddedResource Include="Icon.ico">
+		  <LogicalName>Icon.ico</LogicalName>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Icon.bmp">
+		  <LogicalName>Icon.bmp</LogicalName>
+	  </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
